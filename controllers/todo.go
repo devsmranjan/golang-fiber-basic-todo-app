@@ -31,7 +31,7 @@ var todos = []*Todo{
 func GetTodos(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
-		"data": map[string][]*Todo{
+		"data": fiber.Map{
 			"todos": todos,
 		},
 	})
@@ -68,7 +68,7 @@ func CreateTodo(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"success": true,
-		"data": map[string]*Todo{
+		"data": fiber.Map{
 			"todo": todo,
 		},
 	})
@@ -96,7 +96,7 @@ func GetTodo(c *fiber.Ctx) error {
 		if todo.ID == id {
 			return c.Status(fiber.StatusOK).JSON(fiber.Map{
 				"success": true,
-				"data": map[string]*Todo{
+				"data": fiber.Map{
 					"todo": todo,
 				},
 			})
@@ -169,7 +169,7 @@ func UpdateTodo(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
-		"data": map[string]*Todo{
+		"data": fiber.Map{
 			"todo": todo,
 		},
 	})
@@ -198,10 +198,7 @@ func DeleteTodo(c *fiber.Ctx) error {
 
 			todos = append(todos[:i], todos[i+1:]...)
 
-			return c.Status(fiber.StatusNoContent).JSON(fiber.Map{
-				"success": true,
-				"message": "Deleted Successfully",
-			})
+			return c.SendStatus(fiber.StatusNoContent)
 		}
 	}
 
