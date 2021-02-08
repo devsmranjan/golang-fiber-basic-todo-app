@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
@@ -49,10 +48,10 @@ func CreateTodo(c *fiber.Ctx) error {
 
 	// if error
 	if err != nil {
-		fmt.Println(err)
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"message": "Cannot parse JSON",
+			"error":   err,
 		})
 	}
 
@@ -88,6 +87,7 @@ func GetTodo(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"message": "Cannot parse Id",
+			"error":   err,
 		})
 	}
 
@@ -124,6 +124,7 @@ func UpdateTodo(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"message": "Cannot parse id",
+			"error":   err,
 		})
 	}
 
@@ -140,6 +141,7 @@ func UpdateTodo(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"message": "Cannot parse JSON",
+			"error":   err,
 		})
 	}
 
@@ -189,6 +191,7 @@ func DeleteTodo(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"message": "Cannot parse id",
+			"error":   err,
 		})
 	}
 
