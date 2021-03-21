@@ -12,8 +12,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-// todoCollection : Mongo DB Todo Collection
-
 // GetTodos : get all todos
 func GetTodos(c *fiber.Ctx) error {
 	todoCollection := config.MI.DB.Collection(os.Getenv("TODO_COLLECTION"))
